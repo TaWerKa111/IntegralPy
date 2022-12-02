@@ -230,7 +230,7 @@ def trapezoids_method_iteration(queue: list[float], start: float, end: float, ep
         if abs(trapezoid_square_1 - trapezoid_square_2) < eps:
             break
 
-        count_step_1, count_step_2 = count_step_2, count_step_2 * 2
+        count_step_1, count_step_2 = count_step_2, count_step_2 * 3
 
     return trapezoid_square_2, count_step_2
 
