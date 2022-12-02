@@ -212,7 +212,7 @@ def trapezoids_method(queue: list[float], start: float, end: float, count_step: 
 
 def trapezoids_method_iteration(queue: list[float], start: float, end: float, eps: float) -> tuple[float, int]:
     """
-    Расчет интегралла методом трапеций.
+    Расчет интеграла методом трапеций.
     :param eps:
     :param end:
     :param start:
@@ -235,7 +235,7 @@ def trapezoids_method_iteration(queue: list[float], start: float, end: float, ep
     return trapezoid_square_2, count_step_2
 
 
-def invoke_method(expression: str, start:int, end:int, eps: float) -> tuple[bool, float]:
+def invoke_method(expression: str, start: int, end: int, eps: float) -> tuple[bool, float]:
     """
 
     :param eps:
