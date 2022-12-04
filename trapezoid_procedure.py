@@ -118,6 +118,10 @@ def check_parentheses(expression: str) -> bool:
     """
     stack = list()
 
+    # Исправлено с помощью тестов
+    if not expression:
+        return False
+
     for char in expression:
         if char == "(":
             stack.append(char)
@@ -126,6 +130,10 @@ def check_parentheses(expression: str) -> bool:
                 stack.pop()
             except IndexError:
                 return False
+
+    # Исправлено с помощью тестов
+    if stack:
+        return False
 
     return True
 
