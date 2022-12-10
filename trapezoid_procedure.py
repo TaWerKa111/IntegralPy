@@ -28,6 +28,10 @@ PRIORITY_OPERATION = {
 }
 
 
+class NoCalculation(Exception):
+    pass
+
+
 def parse_expression_to_postfix_form(expression: str) -> list:
     """
     Перевод выражения в постфиксную запись в виде очереди
@@ -169,6 +173,8 @@ def calculation(queue_postfix_expr: list, x: float) -> float:
     :param x:
     :return:
     """
+    if not queue_postfix_expr:
+        raise NoCalculation("Список пуст!")
 
     stack = list()
 
@@ -189,7 +195,10 @@ def calculation(queue_postfix_expr: list, x: float) -> float:
             if char_expr == "x":
                 stack.append(x)
             else:
-                stack.append(float(char_expr))
+                try:
+                    stack.append(float(char_expr))
+                except ValueError:
+                    raise NoCalculation("Введен символ отличный от X")
 
     return stack.pop()
 

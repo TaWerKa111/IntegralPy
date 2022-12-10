@@ -7,7 +7,7 @@ from trapezoid_procedure import (
     check_parentheses,
     replace_math_func_to_char,
     calculation,
-    invoke_method
+    invoke_method, NoCalculation
 )
 
 
@@ -116,7 +116,8 @@ data_for_calculation = [
     (["x", "1", "+"], 1, 2)
 ]
 data_for_calculation_negative = [
-    (["2", "x", "+"], 1, 4),
+    (["2", "y", "+"], 1, 4),
+    ([], 1, 4),
 ]
 
 
@@ -127,28 +128,30 @@ def test_calculation(postfix, x, result):
 
 @pytest.mark.parametrize("postfix, x, result", data_for_calculation_negative)
 def test_calculation_negative(postfix, x, result):
-    assert calculation(postfix, x) != result
+    try:
+        calculation(postfix, x)
+    except NoCalculation as err:
+        assert NoCalculation == type(err)
 
-
-# TEST invoke_method
-data_for_invoke = [
-    (),
-    (),
-    ()
-]
-
-data_for_invoke_negative = [
-    (),
-    (),
-    ()
-]
-
-
-@pytest.mark.parametrize("expression, start, end, eps, result", [])
-def test_invoke_method(expression, start, end, eps, result):
-    assert invoke_method(expression, start, end, eps) == result
-
-
-@pytest.mark.parametrize("expression, start, end, eps, result", [])
-def test_invoke_method_negative(expression, start, end, eps, result):
-    assert invoke_method(expression, start, end, eps) != result
+# # TEST invoke_method
+# data_for_invoke = [
+#     (),
+#     (),
+#     ()
+# ]
+#
+# data_for_invoke_negative = [
+#     (),
+#     (),
+#     ()
+# ]
+#
+#
+# @pytest.mark.parametrize("expression, start, end, eps, result", [])
+# def test_invoke_method(expression, start, end, eps, result):
+#     assert invoke_method(expression, start, end, eps) == result
+#
+#
+# @pytest.mark.parametrize("expression, start, end, eps, result", [])
+# def test_invoke_method_negative(expression, start, end, eps, result):
+#     assert invoke_method(expression, start, end, eps) != result
