@@ -174,7 +174,7 @@ def test_invoke_method_negative():
     # assert result is False
 
     try:
-        invoke_method("string")
+        invoke_method("asd")
     except Exception as err:
         assert type(err) is NoCalculation
 
