@@ -252,7 +252,7 @@ def trapezoids_method_iteration(queue: list[float], start: float, end: float, ep
     return trapezoid_square_2, count_step_2
 
 
-def invoke_method(expression: str, start: int, end: int, eps: float) -> tuple[bool, float]:
+def invoke_method(expression: str, start: int=1, end: int=2, eps: float=0.1) -> tuple[bool, float]:
     """
 
     :param eps:

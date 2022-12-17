@@ -130,28 +130,53 @@ def test_calculation(postfix, x, result):
 def test_calculation_negative(postfix, x, result):
     try:
         calculation(postfix, x)
-    except NoCalculation as err:
+    except Exception as err:
         assert NoCalculation == type(err)
 
-# # TEST invoke_method
-# data_for_invoke = [
-#     (),
-#     (),
-#     ()
-# ]
-#
-# data_for_invoke_negative = [
-#     (),
-#     (),
-#     ()
-# ]
-#
-#
-# @pytest.mark.parametrize("expression, start, end, eps, result", [])
-# def test_invoke_method(expression, start, end, eps, result):
-#     assert invoke_method(expression, start, end, eps) == result
-#
-#
-# @pytest.mark.parametrize("expression, start, end, eps, result", [])
-# def test_invoke_method_negative(expression, start, end, eps, result):
-#     assert invoke_method(expression, start, end, eps) != result
+
+# TEST invoke_method
+def test_invoke_method():
+    # any expression, without 'X'
+    result, ans = invoke_method("2+2")
+    assert result is True
+    assert ans == 4
+
+    result, ans = invoke_method("sin(x)")
+    assert result is True
+    assert ans.__round__(3) == 0.956
+
+    result, ans = invoke_method("x")
+    assert result is True
+    assert ans.__round__(3) == 1.5
+
+    result, ans = invoke_method("3^x/x+x^2-4")
+    assert result is True
+    assert ans.__round__(3) == 1.895
+
+    invoke_method("0.9x+2")
+    assert result is True
+
+
+# TEST invoke_method
+def test_invoke_method_negative():
+    # empty string
+    result, ans = invoke_method("", 1, 1, 0.1)
+    assert result is False
+
+
+    result, ans = invoke_method("(x+2")
+    assert result is False
+
+    result, ans = invoke_method("(()()")
+    assert result is False
+
+    result, ans = invoke_method("222")
+    assert result is False
+
+    try:
+        invoke_method("string")
+    except Exception as err:
+        assert type(err) is NoCalculation
+
+
+
